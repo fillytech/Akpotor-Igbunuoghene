@@ -25,6 +25,9 @@
   "license": "MIT",
   "devDependencies": {
     "concurrently": "^8.2.2",
-    "live-server": "^1.2.2"
+    "live-server": "^1.2.0"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
   }
 }
