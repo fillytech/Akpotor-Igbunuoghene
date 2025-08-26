@@ -1,5 +1,3 @@
-// Biometric capture functionality for BVS
-
 let currentStream = null;
 let biometricData = {
     fingerprint: null,
@@ -7,12 +5,47 @@ let biometricData = {
     iris: null
 };
 
-// Camera utility for face/iris
+// Button triggers
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('capture-fingerprint').onclick = captureFingerprint;
+    document.getElementById('capture-face').onclick = () => startCamera('face');
+    document.getElementById('capture-iris').onclick = () => startCamera('iris');
+});
+
+// Scan Animation
+function showScanAnimation(type, duration = 2000) {
+    const preview = document.querySelector('.biometric-preview');
+    preview.innerHTML = `
+      <div style="text-align:center;">
+        <i class="${type === 'fingerprint' ? 'fas fa-fingerprint' : type === 'face' ? 'fas fa-user' : 'fas fa-eye'} fa-4x scan-animate"></i>
+        <p>Processing <span class="dot-animate"></span></p>
+      </div>
+    `;
+    let dots = 0;
+    const dotElem = preview.querySelector('.dot-animate');
+    const interval = setInterval(() => {
+        dots = (dots + 1) % 4;
+        dotElem.textContent = '.'.repeat(dots);
+    }, 400);
+    setTimeout(() => clearInterval(interval), duration);
+}
+
+// Fingerprint capture
+async function captureFingerprint() {
+    showScanAnimation('fingerprint');
+    setTimeout(() => {
+        biometricData.fingerprint = 'mock-fingerprint-data';
+        updatePreview('fingerprint');
+        alert('Fingerprint captured (mock)');
+    }, 2000);
+}
+
+// Start camera for face/iris
 async function startCamera(type) {
-    try {
+    showScanAnimation(type);
+    setTimeout(async () => {
         let videoElement = document.getElementById(`${type}-video`);
         if (!videoElement) {
-            // Dynamically create video element for face/iris
             videoElement = document.createElement('video');
             videoElement.id = `${type}-video`;
             videoElement.autoplay = true;
@@ -21,15 +54,25 @@ async function startCamera(type) {
             videoElement.style.marginTop = '1rem';
             document.querySelector('.biometric-preview').appendChild(videoElement);
         }
-        const stream = await navigator.mediaDevices.getUserMedia({
-            video: { width: { ideal: 640 }, height: { ideal: 480 } }
-        });
-        videoElement.srcObject = stream;
-        currentStream = stream;
-    } catch (error) {
-        console.error('Error accessing camera:', error);
-        alert('Could not access camera. Please check permissions.');
-    }
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({
+                video: { width: { ideal: 640 }, height: { ideal: 480 } }
+            });
+            videoElement.srcObject = stream;
+            currentStream = stream;
+            // Add capture button
+            let captureBtn = document.createElement('button');
+            captureBtn.textContent = `Confirm ${type.charAt(0).toUpperCase() + type.slice(1)} Capture`;
+            captureBtn.onclick = () => {
+                if (type === 'face') captureFace();
+                if (type === 'iris') captureIris();
+            };
+            videoElement.parentElement.appendChild(captureBtn);
+        } catch (error) {
+            alert('Could not access camera. Please check permissions.');
+            if (videoElement) videoElement.remove();
+        }
+    }, 2000);
 }
 
 function stopCamera(type) {
@@ -39,27 +82,15 @@ function stopCamera(type) {
     }
     const videoElement = document.getElementById(`${type}-video`);
     if (videoElement) videoElement.remove();
-}
-
-// Scan Animation
-function showScanAnimation(type, duration = 2000) {
-    // ... (copy the implementation from your existing biometric.js)
-}
-
-// Fingerprint capture (WebAuthn/fallback)
-async function captureFingerprint() {
-    showScanAnimation('fingerprint');
-    setTimeout(async () => {
-        biometricData.fingerprint = 'mock-fingerprint-data';
-        updatePreview('fingerprint');
-        alert('Fingerprint captured (mock)');
-    }, 2000);
+    // Remove capture button
+    const btn = document.querySelector('.biometric-preview button');
+    if (btn) btn.remove();
 }
 
 // Face capture
 async function captureFace() {
     showScanAnimation('face');
-    setTimeout(async () => {
+    setTimeout(() => {
         const video = document.getElementById('face-video');
         if (video) {
             const canvas = document.createElement('canvas');
@@ -78,7 +109,7 @@ async function captureFace() {
 // Iris capture
 async function captureIris() {
     showScanAnimation('iris');
-    setTimeout(async () => {
+    setTimeout(() => {
         const video = document.getElementById('iris-video');
         if (video) {
             const canvas = document.createElement('canvas');
@@ -98,55 +129,15 @@ async function captureIris() {
 function updatePreview(type) {
     const preview = document.querySelector('.biometric-preview');
     if (type === 'fingerprint' && biometricData.fingerprint) {
-        preview.innerHTML = `<h3><i class="fas fa-image"></i> Preview</h3>
+        preview.innerHTML = `<h3><i class="fas fa-fingerprint"></i> Fingerprint Preview</h3>
             <p>Fingerprint data captured.</p>`;
     }
     if (type === 'face' && biometricData.face) {
-        preview.innerHTML = `<h3><i class="fas fa-image"></i> Preview</h3>
-            <img src="${biometricData.face}" alt="Face Preview" style="max-width: 220px; border-radius:8px;">`;
+        preview.innerHTML = `<h3><i class="fas fa-user"></i> Face Preview</h3>
+            <img src="${biometricData.face}" alt="Face" style="max-width:220px;border-radius:8px;"/>`;
     }
     if (type === 'iris' && biometricData.iris) {
-        preview.innerHTML = `<h3><i class="fas fa-image"></i> Preview</h3>
-            <img src="${biometricData.iris}" alt="Iris Preview" style="max-width: 220px; border-radius:8px;">`;
+        preview.innerHTML = `<h3><i class="fas fa-eye"></i> Iris Preview</h3>
+            <img src="${biometricData.iris}" alt="Iris" style="max-width:220px;border-radius:8px;"/>`;
     }
 }
-
-// Handle biometric type change
-function handleTypeChange() {
-    const type = document.getElementById('biometric-type').value;
-    stopCamera('face');
-    stopCamera('iris');
-    if (type === 'face' || type === 'iris') {
-        startCamera(type);
-    }
-}
-
-// Handle form submit
-document.addEventListener('DOMContentLoaded', () => {
-    // Button events
-    document.querySelector('.biometric-actions button:nth-child(1)').addEventListener('click', captureFingerprint);
-    document.querySelector('.biometric-actions button:nth-child(2)').addEventListener('click', captureFace);
-    document.querySelector('.biometric-actions button:nth-child(3)').addEventListener('click', captureIris);
-
-    // Type change event
-    document.getElementById('biometric-type').addEventListener('change', handleTypeChange);
-
-    // Form submit event
-    document.getElementById('biometric-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const personId = document.getElementById('person-id').value;
-        const type = document.getElementById('biometric-type').value;
-        if (!biometricData[type]) {
-            alert(`No ${type} data captured yet.`);
-            return;
-        }
-        // Save logic (could send to server or localStorage)
-        alert(`Biometric data for ${personId} (${type}) saved!`);
-        // Optionally clear preview and biometricData[type]
-        biometricData[type] = null;
-        updatePreview(type);
-    });
-
-    // Initial camera if needed
-    handleTypeChange();
-});
