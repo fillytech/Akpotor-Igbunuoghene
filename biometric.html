@@ -3,269 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biometric Capture - Biological Verification System</title>
-    <!-- Google Fonts & Font Awesome -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background: #f2f7fc;
-            color: #23395d;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background: linear-gradient(90deg, #1e355d 60%, #2776c1 100%);
-            color: #fff;
-            padding: 1.2rem 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-        #npf-logo {
-            height: 48px;
-            margin-right: 1.5rem;
-            border-radius: 6px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-        header h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            margin: 0;
-            flex: 1;
-        }
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 1.5rem;
-            margin: 0;
-            padding: 0;
-        }
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1.1rem;
-            position: relative;
-        }
-        nav a.active {
-            font-weight: 700;
-        }
-        nav a::after {
-            content: '';
-            display: block;
-            width: 0;
-            height: 2px;
-            background: #2db4f0;
-            transition: 0.3s;
-            position: absolute;
-            left: 0;
-            bottom: -4px;
-        }
-        nav a:hover::after, nav a.active::after {
-            width: 100%;
-        }
-
-        main {
-            max-width: 1100px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-        h2 {
-            margin-top: 0;
-            font-size: 2rem;
-            font-weight: 700;
-            color: #1e355d;
-        }
-        .card {
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(39,118,193,0.07);
-            padding: 2rem;
-            margin-top: 1rem;
-        }
-        #biometric-tabs {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-        #biometric-tabs button {
-            background: #2776c1;
-            color: #fff;
-            border: none;
-            padding: 0.8rem 2rem;
-            font-size: 1.05rem;
-            border-radius: 6px 6px 0 0;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background 0.2s, box-shadow 0.2s;
-            box-shadow: 0 2px 8px rgba(39,118,193,0.09);
-            outline: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        #biometric-tabs button.active,
-        #biometric-tabs button:hover {
-            background: #1e355d;
-            color: #fff;
-        }
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.3s;
-        }
-        .tab-content.active {
-            display: block;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to   { opacity: 1; }
-        }
-        label {
-            display: block;
-            font-weight: 500;
-            margin-top: 1rem;
-        }
-        input, select, button {
-            font-family: 'Roboto', sans-serif;
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            padding: 0.7rem;
-            border-radius: 5px;
-            border: 1px solid #bfd5ef;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        button {
-            background: #2776c1;
-            color: #fff;
-            border: none;
-            font-weight: 600;
-            transition: background 0.2s, box-shadow 0.2s;
-            box-shadow: 0 2px 8px rgba(39,118,193,0.09);
-            cursor: pointer;
-            padding: 0.7rem 1.2rem;
-            border-radius: 6px;
-        }
-        button:hover {
-            background: #1e355d;
-        }
-        .biometric-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-        .biometric-section {
-            margin-top: 1rem;
-        }
-        .biometric-icon {
-            font-size: 2rem;
-            color: #2776c1;
-            margin-bottom: .5rem;
-        }
-        .video-preview {
-            width: 100%;
-            max-width: 300px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(39,118,193,0.09);
-            margin-bottom: 1rem;
-        }
-        footer {
-            background: #1e355d;
-            color: #fff;
-            text-align: center;
-            padding: 1.2rem 0;
-            margin-top: 2rem;
-        }
-    </style>
+    <title>Biometric Capture - BVS</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
-        <img id="npf-logo" src="images/npf-logo.jpg" alt="Nigerian Police Force Logo">
         <h1>Biological Verification System</h1>
         <nav>
             <ul>
                 <li><a href="index.html">Dashboard</a></li>
-                <li><a href="biometric.html" class="active">Biometric Capture</a></li>
+                <li><a href="biometric.html">Biometric Capture</a></li>
                 <li><a href="cases.html">Case Management</a></li>
                 <li><a href="search.html">Database Search</a></li>
                 <li><a href="admin.html">Admin</a></li>
                 <li><a href="login.html">Login</a></li>
-                <li><a href="register.html">Register</a></li>
             </ul>
         </nav>
     </header>
     <main>
         <h2>Biometric Capture</h2>
-        <div class="card">
-            <div id="biometric-tabs">
-                <button id="fingerprint-tab" class="active" onclick="showTab('fingerprint')">
-                    <i class="fa-solid fa-fingerprint biometric-icon"></i> Fingerprint
-                </button>
-                <button id="face-tab" onclick="showTab('face')">
-                    <i class="fa-regular fa-face-smile biometric-icon"></i> Face
-                </button>
-                <button id="iris-tab" onclick="showTab('iris')">
-                    <i class="fa-regular fa-eye biometric-icon"></i> Iris
-                </button>
-                <button id="dna-tab" onclick="showTab('dna')">
-                    <i class="fa-solid fa-dna biometric-icon"></i> DNA
-                </button>
-            </div>
-            <div id="fingerprint" class="tab-content active biometric-section">
-                <label for="fingerprint-capture">Fingerprint Capture</label>
-                <input type="file" id="fingerprint-capture" accept="image/*">
-                <div class="biometric-actions">
-                    <button onclick="enrollFingerprint()">Enroll</button>
-                    <button onclick="verifyFingerprint()">Verify</button>
-                </div>
-            </div>
-            <div id="face" class="tab-content biometric-section">
-                <label for="face-video">Face Capture</label>
-                <video id="face-video" class="video-preview" autoplay playsinline></video>
-                <div class="biometric-actions">
-                    <button onclick="captureFace()">Capture</button>
-                    <button onclick="enrollFace()">Enroll</button>
-                    <button onclick="verifyFace()">Verify</button>
-                </div>
-            </div>
-            <div id="iris" class="tab-content biometric-section">
-                <label for="iris-video">Iris Capture</label>
-                <video id="iris-video" class="video-preview" autoplay playsinline></video>
-                <div class="biometric-actions">
-                    <button onclick="captureIris()">Capture</button>
-                    <button onclick="enrollIris()">Enroll</button>
-                    <button onclick="verifyIris()">Verify</button>
-                </div>
-            </div>
-            <div id="dna" class="tab-content biometric-section">
-                <label for="dna-capture">DNA Sequence Upload</label>
-                <input type="file" id="dna-capture" accept=".txt">
-                <div class="biometric-actions">
-                    <button onclick="enrollDNA()">Enroll</button>
-                    <button onclick="verifyDNA()">Verify</button>
-                </div>
-            </div>
+        <div id="biometric-tabs">
+            <button onclick="showTab('fingerprint')">Fingerprint</button>
+            <button onclick="showTab('face')">Face</button>
+            <button onclick="showTab('iris')">Iris</button>
+            <button onclick="showTab('dna')">DNA</button>
+        </div>
+
+        <div id="fingerprint-tab" class="tab-content">
+            <h3>Fingerprint Capture</h3>
+            <div id="fingerprint-preview"></div>
+            <button onclick="captureFingerprint()">Capture Fingerprint</button>
+            <button onclick="enrollFingerprint()">Enroll</button>
+            <button onclick="verifyFingerprint()">Verify</button>
+        </div>
+
+        <div id="face-tab" class="tab-content" style="display:none;">
+            <h3>Face Capture</h3>
+            <video id="face-video" width="320" height="240" autoplay></video>
+            <button onclick="captureFace()">Capture Face</button>
+            <button onclick="enrollFace()">Enroll</button>
+            <button onclick="verifyFace()">Verify</button>
+        </div>
+
+        <div id="iris-tab" class="tab-content" style="display:none;">
+            <h3>Iris Capture</h3>
+            <video id="iris-video" width="320" height="240" autoplay></video>
+            <button onclick="captureIris()">Capture Iris</button>
+            <button onclick="enrollIris()">Enroll</button>
+            <button onclick="verifyIris()">Verify</button>
+        </div>
+
+        <div id="dna-tab" class="tab-content" style="display:none;">
+            <h3>DNA Upload</h3>
+            <input type="file" id="dna-file" accept=".fasta,.vcf,.txt,.csv">
+            <button onclick="processDNA()">Process DNA</button>
+            <button onclick="enrollDNA()">Enroll</button>
+            <button onclick="verifyDNA()">Verify</button>
         </div>
     </main>
     <footer>
         <p>&copy; 2025 Akpotor Igbunuoghene Ogheneochukome's Project</p>
     </footer>
     <script src="js/biometric.js"></script>
-    <script>
-        function showTab(tab) {
-            const tabs = ['fingerprint', 'face', 'iris', 'dna'];
-            tabs.forEach(t => {
-                document.getElementById(t).classList.remove('active');
-                document.getElementById(t + '-tab').classList.remove('active');
-            });
-            document.getElementById(tab).classList.add('active');
-            document.getElementById(tab + '-tab').classList.add('active');
-        }
-    </script>
 </body>
 </html>
