@@ -3,8 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Case Management - BVS</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Case Management - Biological Verification System</title>
+    <!-- Google Fonts & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #f2f7fc;
+            color: #23395d;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: linear-gradient(90deg, #1e355d 60%, #2776c1 100%);
+            color: #fff;
+            padding: 1.2rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        #npf-logo {
+            height: 48px;
+            margin-right: 1.5rem;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin: 0;
+            flex: 1;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            position: relative;
+        }
+        nav a.active {
+            font-weight: 700;
+        }
+        nav a::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: #2db4f0;
+            transition: 0.3s;
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+        }
+        nav a:hover::after, nav a.active::after {
+            width: 100%;
+        }
+        main {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        h2 {
+            margin-top: 0;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e355d;
+        }
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(39,118,193,0.07);
+            padding: 2rem;
+            margin-top: 1rem;
+        }
+        .form-section label {
+            display: block;
+            font-weight: 500;
+            margin-top: 1rem;
+        }
+        .form-section input, .form-section select, .form-section textarea, .form-section button {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            padding: 0.7rem;
+            border-radius: 5px;
+            border: 1px solid #bfd5ef;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .form-section button {
+            background: #2776c1;
+            color: #fff;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .form-section button:hover {
+            background: #1e355d;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background: #f6fbff;
+            box-shadow: 0 1px 4px rgba(39,118,193,0.04);
+        }
+        th, td {
+            padding: 0.85rem;
+            border-bottom: 1px solid #e5e9f2;
+        }
+        th {
+            background: #e5e9f2;
+            font-weight: 600;
+            color: #2776c1;
+        }
+        td {
+            color: #23395d;
+        }
+        .action-btn {
+            background: #2db4f0;
+            color: #fff;
+            border: none;
+            padding: 0.4rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-right: 0.3rem;
+            transition: background 0.2s;
+        }
+        .action-btn:hover {
+            background: #2776c1;
+        }
+        footer {
+            text-align: center;
+            background: #1e355d;
+            color: #fff;
+            padding: 1rem;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            margin-top: 2rem;
+            border-top: 2px solid #2776c1;
+        }
+        @media (max-width: 700px) {
+            main { padding: 0 0.3rem;}
+            nav ul {flex-direction: column;}
+            nav a {padding: 0.5rem 0;}
+            table, thead, tbody, th, td, tr {display: block;}
+            th, td {padding: 0.5rem;}
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -12,70 +170,71 @@
         <h1>Biological Verification System</h1>
         <nav>
             <ul>
-                <li><a href="index.html">Dashboard</a></li>
-                <li><a href="biometric.html">Biometric Capture</a></li>
-                <li><a href="cases.html">Case Management</a></li>
-                <li><a href="search.html">Database Search</a></li>
-                <li><a href="admin.html">Admin</a></li>
-                <li><a href="login.html">Login</a></li>
+                <li><a href="index.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="biometric.html"><i class="fas fa-fingerprint"></i> Biometric Capture</a></li>
+                <li><a href="cases.html" class="active"><i class="fas fa-briefcase"></i> Case Management</a></li>
+                <li><a href="search.html"><i class="fas fa-search"></i> Database Search</a></li>
+                <li><a href="admin.html"><i class="fas fa-user-shield"></i> Admin</a></li>
+                <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <h2>Case Management</h2>
-        
-        <div id="create-case">
-            <h3>Create New Case</h3>
-            <form id="case-form">
-                <input type="text" id="case-title" placeholder="Case Title" required>
-                <textarea id="case-description" placeholder="Case Description"></textarea>
-                <select id="case-status">
-                    <option value="open">Open</option>
-                    <option value="in-review">In Review</option>
-                    <option value="matched">Matched</option>
-                    <option value="closed">Closed</option>
-                </select>
-                <button type="submit">Create Case</button>
-            </form>
-        </div>
-
-        <div id="cases-list">
-            <h3>Existing Cases</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Title</th>
-                        <th>Status</th>
-                        <th>Created</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="cases-table-body">
-                    <!-- Cases will be populated here -->
-                </tbody>
-            </table>
-        </div>
-
-        <div id="case-details" style="display:none;">
-            <h3>Case Details</h3>
-            <div id="case-info"></div>
-            
-            <h4>Add Note</h4>
-            <textarea id="case-note" placeholder="Add a note..."></textarea>
-            <button onclick="addCaseNote()">Add Note</button>
-            
-            <h4>Attach File</h4>
-            <input type="file" id="case-attachment">
-            <button onclick="addCaseAttachment()">Attach File</button>
-            
-            <h4>Timeline</h4>
-            <div id="case-timeline"></div>
-        </div>
+        <section class="card">
+            <h2><i class="fas fa-briefcase"></i> Case Management</h2>
+            <div class="form-section">
+                <h3><i class="fas fa-plus-circle"></i> Add New Case</h3>
+                <form id="case-form">
+                    <label for="case-title">Case Title</label>
+                    <input type="text" id="case-title" name="case-title" placeholder="Enter case title" required>
+                    <label for="case-type">Case Type</label>
+                    <select id="case-type" name="case-type" required>
+                        <option value="criminal">Criminal</option>
+                        <option value="civil">Civil</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <label for="case-desc">Description</label>
+                    <textarea id="case-desc" name="case-desc" rows="3" placeholder="Case description" required></textarea>
+                    <label for="case-date">Date</label>
+                    <input type="date" id="case-date" name="case-date" required>
+                    <button type="submit"><i class="fas fa-save"></i> Save Case</button>
+                </form>
+            </div>
+            <div class="cases-list">
+                <h3><i class="fas fa-list"></i> Existing Cases</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Case ID</th>
+                            <th>Title</th>
+                            <th>Type</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cases-table-body">
+                        <!-- Case records will be populated here -->
+                        <tr>
+                            <td>001</td>
+                            <td>Armed Robbery</td>
+                            <td>Criminal</td>
+                            <td>2023-11-05</td>
+                            <td>Open</td>
+                            <td>
+                                <button class="action-btn"><i class="fas fa-eye"></i> View</button>
+                                <button class="action-btn"><i class="fas fa-edit"></i> Edit</button>
+                                <button class="action-btn"><i class="fas fa-trash-alt"></i> Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
     </main>
     <footer>
         <p>&copy; 2023 Biological Verification System</p>
     </footer>
-    <script src="js/cases.js"></script>
+    <!-- Optionally include per-page JS files here -->
 </body>
 </html>
