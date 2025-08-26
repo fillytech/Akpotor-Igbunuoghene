@@ -4,235 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel - BVS</title>
-    <!-- Google Fonts & Font Awesome -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background: #f2f7fc;
-            color: #23395d;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background: linear-gradient(90deg, #1e355d 60%, #2776c1 100%);
-            color: #fff;
-            padding: 1.2rem 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-        #npf-logo {
-            height: 48px;
-            margin-right: 1.5rem;
-            border-radius: 6px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-        header h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            margin: 0;
-            flex: 1;
-        }
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 1.5rem;
-            margin: 0;
-            padding: 0;
-        }
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1.1rem;
-            position: relative;
-        }
-        nav a::after {
-            content: '';
-            display: block;
-            width: 0;
-            height: 2px;
-            background: #2db4f0;
-            transition: 0.3s;
-            position: absolute;
-            left: 0;
-            bottom: -4px;
-        }
-        nav a:hover::after, nav a.active::after {
-            width: 100%;
-        }
-
-        main {
-            max-width: 1100px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-        h2 {
-            margin-top: 0;
-            font-size: 2rem;
-            font-weight: 700;
-            color: #1e355d;
-        }
-        #admin-tabs {
-            margin: 2rem 0 1rem 0;
-            display: flex;
-            gap: 1rem;
-        }
-        #admin-tabs button {
-            background: #2776c1;
-            color: #fff;
-            border: none;
-            padding: 0.8rem 2rem;
-            font-size: 1.05rem;
-            border-radius: 6px 6px 0 0;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background 0.2s, box-shadow 0.2s;
-            box-shadow: 0 2px 8px rgba(39,118,193,0.09);
-            outline: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        #admin-tabs button.active, #admin-tabs button:hover {
-            background: #1e355d;
-        }
-
-        .admin-tab-content {
-            background: #fff;
-            border-radius: 0 0 8px 8px;
-            box-shadow: 0 4px 20px rgba(39,118,193,0.07);
-            padding: 2rem;
-            margin-top: -2px;
-            display: none;
-            animation: fadeIn 0.5s;
-        }
-        .admin-tab-content.active {
-            display: block;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px);}
-            to { opacity: 1; transform: none;}
-        }
-        h3, h4, h5 {
-            color: #2776c1;
-            margin-top: 1.5rem;
-        }
-        form input, form select, form button {
-            font-family: 'Roboto', sans-serif;
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            padding: 0.7rem;
-            border-radius: 5px;
-            border: 1px solid #bfd5ef;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        form button, button[type="submit"], button:not([type]), #admin-tabs button {
-            background: #2776c1;
-            color: #fff;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        form button:hover, button[type="submit"]:hover {
-            background: #1e355d;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-            background: #f6fbff;
-            box-shadow: 0 1px 4px rgba(39,118,193,0.04);
-        }
-        th, td {
-            padding: 0.85rem;
-            border-bottom: 1px solid #e5e9f2;
-        }
-        th {
-            background: #e5e9f2;
-            font-weight: 600;
-            color: #2776c1;
-        }
-        td {
-            color: #23395d;
-        }
-        .action-btn {
-            background: #2db4f0;
-            color: #fff;
-            border: none;
-            padding: 0.4rem 1rem;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            margin-right: 0.3rem;
-            transition: background 0.2s;
-        }
-        .action-btn:hover {
-            background: #2776c1;
-        }
-        .export-section, #audit-filters {
-            margin-bottom: 1.2rem;
-            padding: 1rem;
-            background: #f2f7fc;
-            border-radius: 6px;
-        }
-        #export-progress {
-            color: #2776c1;
-            font-weight: 600;
-        }
-        footer {
-            text-align: center;
-            background: #1e355d;
-            color: #fff;
-            padding: 1rem;
-            font-size: 1rem;
-            letter-spacing: 1px;
-            margin-top: 2rem;
-            border-top: 2px solid #2776c1;
-        }
-        @media (max-width: 700px) {
-            main { padding: 0 0.3rem;}
-            #admin-tabs {flex-direction: column;}
-            #admin-tabs button {width: 100%;}
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <header>
-        <img id="npf-logo" src="images/npf-logo.jpg" alt="Nigerian Police Force Logo">
         <h1>Biological Verification System</h1>
         <nav>
             <ul>
-                <li><a href="index.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                <li><a href="biometric.html"><i class="fas fa-fingerprint"></i> Biometric Capture</a></li>
-                <li><a href="cases.html"><i class="fas fa-briefcase"></i> Case Management</a></li>
-                <li><a href="search.html"><i class="fas fa-search"></i> Database Search</a></li>
-                <li><a href="admin.html" class="active"><i class="fas fa-user-shield"></i> Admin</a></li>
-                <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="biometric.html">Biometric Capture</a></li>
+                <li><a href="cases.html">Case Management</a></li>
+                <li><a href="search.html">Database Search</a></li>
+                <li><a href="admin.html">Admin</a></li>
+                <li><a href="login.html">Login</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <h2><i class="fas fa-user-cog"></i> Admin Panel</h2>
+        <h2>Admin Panel</h2>
         
         <div id="admin-tabs">
-            <button id="tab-users" class="active" onclick="showAdminTab('users')"><i class="fas fa-users"></i> User Management</button>
-            <button id="tab-system" onclick="showAdminTab('system')"><i class="fas fa-cogs"></i> System Settings</button>
-            <button id="tab-export" onclick="showAdminTab('export')"><i class="fas fa-file-export"></i> Data Export</button>
-            <button id="tab-audit" onclick="showAdminTab('audit')"><i class="fas fa-clipboard-list"></i> Audit Logs</button>
+            <button onclick="showAdminTab('users')">User Management</button>
+            <button onclick="showAdminTab('system')">System Settings</button>
+            <button onclick="showAdminTab('export')">Data Export</button>
+            <button onclick="showAdminTab('audit')">Audit Logs</button>
         </div>
 
-        <div id="users-tab" class="admin-tab-content active">
-            <h3><i class="fas fa-users"></i> User Management</h3>
+        <div id="users-tab" class="admin-tab-content">
+            <h3>User Management</h3>
             
             <div id="create-user">
-                <h4><i class="fas fa-user-plus"></i> Create New User</h4>
+                <h4>Create New User</h4>
                 <form id="user-form">
                     <input type="email" id="user-email" placeholder="Email" required>
                     <input type="password" id="user-password" placeholder="Password" required>
@@ -241,12 +43,12 @@
                         <option value="analyst">Analyst</option>
                         <option value="admin">Admin</option>
                     </select>
-                    <button type="submit"><i class="fas fa-plus"></i> Create User</button>
+                    <button type="submit">Create User</button>
                 </form>
             </div>
 
             <div id="users-list">
-                <h4><i class="fas fa-list"></i> Existing Users</h4>
+                <h4>Existing Users</h4>
                 <table>
                     <thead>
                         <tr>
@@ -264,29 +66,32 @@
             </div>
         </div>
 
-        <div id="system-tab" class="admin-tab-content">
-            <h3><i class="fas fa-cogs"></i> System Settings</h3>
+        <div id="system-tab" class="admin-tab-content" style="display:none;">
+            <h3>System Settings</h3>
             
             <div id="system-config">
-                <h4><i class="fas fa-sliders-h"></i> Configuration</h4>
+                <h4>Configuration</h4>
                 <form id="system-form">
                     <label>
                         <input type="checkbox" id="sdk-mode"> SDK Mode (Enable real biometric SDKs)
                     </label>
+                    
                     <label>
                         Data Retention Period (days):
                         <input type="number" id="retention-days" min="30" max="365" value="90">
                     </label>
+                    
                     <label>
                         Maximum File Upload Size (MB):
                         <input type="number" id="max-file-size" min="1" max="100" value="10">
                     </label>
-                    <button type="submit"><i class="fas fa-save"></i> Save Settings</button>
+                    
+                    <button type="submit">Save Settings</button>
                 </form>
             </div>
 
             <div id="system-status">
-                <h4><i class="fas fa-info-circle"></i> System Status</h4>
+                <h4>System Status</h4>
                 <div id="status-info">
                     <p><strong>Database:</strong> <span id="db-status">Checking...</span></p>
                     <p><strong>Storage:</strong> <span id="storage-status">Checking...</span></p>
@@ -296,14 +101,14 @@
             </div>
         </div>
 
-        <div id="export-tab" class="admin-tab-content">
-            <h3><i class="fas fa-file-export"></i> Data Export</h3>
+        <div id="export-tab" class="admin-tab-content" style="display:none;">
+            <h3>Data Export</h3>
             
             <div id="export-options">
-                <h4><i class="fas fa-download"></i> Export Data</h4>
+                <h4>Export Data</h4>
                 
                 <div class="export-section">
-                    <h5><i class="fas fa-file-alt"></i> Export Format</h5>
+                    <h5>Export Format</h5>
                     <select id="export-format">
                         <option value="csv">CSV</option>
                         <option value="json">JSON</option>
@@ -312,7 +117,7 @@
                 </div>
 
                 <div class="export-section">
-                    <h5><i class="fas fa-calendar-alt"></i> Data Range</h5>
+                    <h5>Data Range</h5>
                     <label>
                         From:
                         <input type="date" id="export-date-from">
@@ -324,7 +129,7 @@
                 </div>
 
                 <div class="export-section">
-                    <h5><i class="fas fa-database"></i> Data Types</h5>
+                    <h5>Data Types</h5>
                     <label>
                         <input type="checkbox" name="export-type" value="persons" checked> Persons
                     </label>
@@ -342,29 +147,29 @@
                     </label>
                 </div>
 
-                <button onclick="generateExport()"><i class="fas fa-file-export"></i> Generate Export</button>
+                <button onclick="generateExport()">Generate Export</button>
                 <div id="export-progress" style="display:none;">
-                    <p><i class="fas fa-spinner fa-spin"></i> Generating export file...</p>
+                    <p>Generating export file...</p>
                 </div>
             </div>
         </div>
 
-        <div id="audit-tab" class="admin-tab-content">
-            <h3><i class="fas fa-clipboard-list"></i> Audit Logs</h3>
+        <div id="audit-tab" class="admin-tab-content" style="display:none;">
+            <h3>Audit Logs</h3>
             
             <div id="audit-filters">
-                <h4><i class="fas fa-filter"></i> Filter Logs</h4>
+                <h4>Filter Logs</h4>
                 <input type="text" id="audit-search" placeholder="Search actions...">
                 <select id="audit-user">
                     <option value="">All Users</option>
                     <!-- User options will be populated -->
                 </select>
                 <input type="date" id="audit-date">
-                <button onclick="loadAuditLogs()"><i class="fas fa-filter"></i> Apply Filters</button>
+                <button onclick="loadAuditLogs()">Apply Filters</button>
             </div>
 
             <div id="audit-logs">
-                <h4><i class="fas fa-history"></i> Recent Activity</h4>
+                <h4>Recent Activity</h4>
                 <table>
                     <thead>
                         <tr>
@@ -383,20 +188,8 @@
         </div>
     </main>
     <footer>
-        <p>&copy; 2025 Akpotor Igbunuoghene Ogheneochukome's Project </p>
+        <p>&copy; 2023 Biological Verification System</p>
     </footer>
-    <script>
-        // Tab Switching with Animation
-        function showAdminTab(tab) {
-            const tabs = ['users', 'system', 'export', 'audit'];
-            tabs.forEach(t => {
-                document.getElementById(t + '-tab').classList.remove('active');
-                document.getElementById('tab-' + t).classList.remove('active');
-            });
-            document.getElementById(tab + '-tab').classList.add('active');
-            document.getElementById('tab-' + tab).classList.add('active');
-        }
-    </script>
     <script src="js/admin.js"></script>
 </body>
 </html>
