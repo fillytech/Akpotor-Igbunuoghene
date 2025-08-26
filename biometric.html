@@ -176,11 +176,16 @@
                     <option value="face">Face</option>
                     <option value="iris">Iris</option>
                 </select>
-                <div class="biometric-actions">
-                    <button type="button"><i class="fas fa-fingerprint"></i> Capture Fingerprint</button>
-                    <button type="button"><i class="fas fa-camera"></i> Capture Face</button>
-                    <button type="button"><i class="fas fa-eye"></i> Capture Iris</button>
-                </div>
+                <div class="card">
+  <h2>Biometric Capture</h2>
+      <div class="biometric-buttons">
+            <button id="capture-fingerprint"><i class="fas fa-fingerprint"></i> Capture Fingerprint</button>
+            <button id="capture-face"><i class="fas fa-user"></i> Capture Face</button>
+            <button id="capture-iris"><i class="fas fa-eye"></i> Capture Iris</button>
+      </div>
+  <div class="biometric-preview"></div>
+</div>
+<script src="js/biometric.js"></script>
                 <button type="submit"><i class="fas fa-save"></i> Save Biometric Data</button>
             </form>
             <div class="biometric-preview">
