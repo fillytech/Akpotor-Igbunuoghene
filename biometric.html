@@ -193,6 +193,18 @@
     <footer>
         <p>&copy; 2025 Akpotor Igbunuoghene Ogheneochukome's Project </p>
     </footer>
-    <!-- Optionally include per-page JS files here -->
+     <script>
+        // Tab Switching with Animation
+        function showAdminTab(tab) {
+            const tabs = ['users', 'system', 'export', 'audit'];
+            tabs.forEach(t => {
+                document.getElementById(t + '-tab').classList.remove('active');
+                document.getElementById('tab-' + t).classList.remove('active');
+            });
+            document.getElementById(tab + '-tab').classList.add('active');
+            document.getElementById('tab-' + tab).classList.add('active');
+        }
+    </script>
+    <script src="js/admin.js"></script>
 </body>
 </html>
