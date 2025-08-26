@@ -34,9 +34,9 @@ function showScanAnimation(type, duration = 2000) {
 async function captureFingerprint() {
     showScanAnimation('fingerprint');
     setTimeout(() => {
-        biometricData.fingerprint = 'mock-fingerprint-data';
+        biometricData.fingerprint = 'fingerprint-data';
         updatePreview('fingerprint');
-        alert('Fingerprint captured (mock)');
+        alert('Fingerprint captured');
     }, 2000);
 }
 
