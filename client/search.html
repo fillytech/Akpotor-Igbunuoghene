@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Search - BVS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Biological Verification System</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="biometric.html">Biometric Capture</a></li>
+                <li><a href="cases.html">Case Management</a></li>
+                <li><a href="search.html">Database Search</a></li>
+                <li><a href="admin.html">Admin</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Database Search</h2>
+        
+        <div id="search-form">
+            <h3>Search Criteria</h3>
+            <form id="search-criteria">
+                <input type="text" id="search-name" placeholder="Name">
+                <input type="text" id="search-national-id" placeholder="National ID">
+                <input type="text" id="search-case-id" placeholder="Case ID">
+                
+                <select id="search-modality">
+                    <option value="">All Modalities</option>
+                    <option value="fingerprint">Fingerprint</option>
+                    <option value="face">Face</option>
+                    <option value="iris">Iris</option>
+                    <option value="dna">DNA</option>
+                </select>
+                
+                <label for="search-date-from">Date From:</label>
+                <input type="date" id="search-date-from">
+                
+                <label for="search-date-to">Date To:</label>
+                <input type="date" id="search-date-to">
+                
+                <button type="submit">Search</button>
+                <button type="button" onclick="clearSearch()">Clear</button>
+            </form>
+        </div>
+
+        <div id="search-results">
+            <h3>Search Results</h3>
+            <div id="results-info"></div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>National ID</th>
+                        <th>Modality</th>
+                        <th>Enrolled</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="results-table-body">
+                    <!-- Results will be populated here -->
+                </tbody>
+            </table>
+            
+            <div id="pagination">
+                <button onclick="previousPage()">Previous</button>
+                <span id="page-info">Page 1 of 1</span>
+                <button onclick="nextPage()">Next</button>
+            </div>
+        </div>
+
+        <div id="result-details" style="display:none;">
+            <h3>Record Details</h3>
+            <div id="record-info"></div>
+            
+            <h4>Biometric Data</h4>
+            <div id="biometric-data"></div>
+            
+            <h4>Associated Cases</h4>
+            <div id="associated-cases"></div>
+            
+            <h4>Audit Trail</h4>
+            <div id="audit-trail"></div>
+            
+            <button onclick="backToResults()">Back to Results</button>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2023 Biological Verification System</p>
+    </footer>
+    <script src="js/search.js"></script>
+</body>
+</html>

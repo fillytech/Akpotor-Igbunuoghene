@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biometric Capture - BVS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Biological Verification System</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="biometric.html">Biometric Capture</a></li>
+                <li><a href="cases.html">Case Management</a></li>
+                <li><a href="search.html">Database Search</a></li>
+                <li><a href="admin.html">Admin</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Biometric Capture</h2>
+        <div id="biometric-tabs">
+            <button onclick="showTab('fingerprint')">Fingerprint</button>
+            <button onclick="showTab('face')">Face</button>
+            <button onclick="showTab('iris')">Iris</button>
+            <button onclick="showTab('dna')">DNA</button>
+        </div>
+
+        <div id="fingerprint-tab" class="tab-content">
+            <h3>Fingerprint Capture</h3>
+            <div id="fingerprint-preview"></div>
+            <button onclick="captureFingerprint()">Capture Fingerprint</button>
+            <button onclick="enrollFingerprint()">Enroll</button>
+            <button onclick="verifyFingerprint()">Verify</button>
+        </div>
+
+        <div id="face-tab" class="tab-content" style="display:none;">
+            <h3>Face Capture</h3>
+            <video id="face-video" width="320" height="240" autoplay></video>
+            <button onclick="captureFace()">Capture Face</button>
+            <button onclick="enrollFace()">Enroll</button>
+            <button onclick="verifyFace()">Verify</button>
+        </div>
+
+        <div id="iris-tab" class="tab-content" style="display:none;">
+            <h3>Iris Capture</h3>
+            <video id="iris-video" width="320" height="240" autoplay></video>
+            <button onclick="captureIris()">Capture Iris</button>
+            <button onclick="enrollIris()">Enroll</button>
+            <button onclick="verifyIris()">Verify</button>
+        </div>
+
+        <div id="dna-tab" class="tab-content" style="display:none;">
+            <h3>DNA Upload</h3>
+            <input type="file" id="dna-file" accept=".fasta,.vcf,.txt,.csv">
+            <button onclick="processDNA()">Process DNA</button>
+            <button onclick="enrollDNA()">Enroll</button>
+            <button onclick="verifyDNA()">Verify</button>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Akpotor Igbunuoghene Ogheneochukome's Project</p>
+    </footer>
+    <script src="js/biometric.js"></script>
+</body>
+</html>

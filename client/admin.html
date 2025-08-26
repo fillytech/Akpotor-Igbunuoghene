@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - BVS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Biological Verification System</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="biometric.html">Biometric Capture</a></li>
+                <li><a href="cases.html">Case Management</a></li>
+                <li><a href="search.html">Database Search</a></li>
+                <li><a href="admin.html">Admin</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Admin Panel</h2>
+        
+        <div id="admin-tabs">
+            <button onclick="showAdminTab('users')">User Management</button>
+            <button onclick="showAdminTab('system')">System Settings</button>
+            <button onclick="showAdminTab('export')">Data Export</button>
+            <button onclick="showAdminTab('audit')">Audit Logs</button>
+        </div>
+
+        <div id="users-tab" class="admin-tab-content">
+            <h3>User Management</h3>
+            
+            <div id="create-user">
+                <h4>Create New User</h4>
+                <form id="user-form">
+                    <input type="email" id="user-email" placeholder="Email" required>
+                    <input type="password" id="user-password" placeholder="Password" required>
+                    <select id="user-role" required>
+                        <option value="officer">Officer</option>
+                        <option value="analyst">Analyst</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                    <button type="submit">Create User</button>
+                </form>
+            </div>
+
+            <div id="users-list">
+                <h4>Existing Users</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Created</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-table-body">
+                        <!-- Users will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="system-tab" class="admin-tab-content" style="display:none;">
+            <h3>System Settings</h3>
+            
+            <div id="system-config">
+                <h4>Configuration</h4>
+                <form id="system-form">
+                    <label>
+                        <input type="checkbox" id="sdk-mode"> SDK Mode (Enable real biometric SDKs)
+                    </label>
+                    
+                    <label>
+                        Data Retention Period (days):
+                        <input type="number" id="retention-days" min="30" max="365" value="90">
+                    </label>
+                    
+                    <label>
+                        Maximum File Upload Size (MB):
+                        <input type="number" id="max-file-size" min="1" max="100" value="10">
+                    </label>
+                    
+                    <button type="submit">Save Settings</button>
+                </form>
+            </div>
+
+            <div id="system-status">
+                <h4>System Status</h4>
+                <div id="status-info">
+                    <p><strong>Database:</strong> <span id="db-status">Checking...</span></p>
+                    <p><strong>Storage:</strong> <span id="storage-status">Checking...</span></p>
+                    <p><strong>Active Users:</strong> <span id="active-users">0</span></p>
+                    <p><strong>System Uptime:</strong> <span id="uptime">N/A</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="export-tab" class="admin-tab-content" style="display:none;">
+            <h3>Data Export</h3>
+            
+            <div id="export-options">
+                <h4>Export Data</h4>
+                
+                <div class="export-section">
+                    <h5>Export Format</h5>
+                    <select id="export-format">
+                        <option value="csv">CSV</option>
+                        <option value="json">JSON</option>
+                        <option value="xml">XML</option>
+                    </select>
+                </div>
+
+                <div class="export-section">
+                    <h5>Data Range</h5>
+                    <label>
+                        From:
+                        <input type="date" id="export-date-from">
+                    </label>
+                    <label>
+                        To:
+                        <input type="date" id="export-date-to">
+                    </label>
+                </div>
+
+                <div class="export-section">
+                    <h5>Data Types</h5>
+                    <label>
+                        <input type="checkbox" name="export-type" value="persons" checked> Persons
+                    </label>
+                    <label>
+                        <input type="checkbox" name="export-type" value="biometrics" checked> Biometrics
+                    </label>
+                    <label>
+                        <input type="checkbox" name="export-type" value="cases" checked> Cases
+                    </label>
+                    <label>
+                        <input type="checkbox" name="export-type" value="matches"> Matches
+                    </label>
+                    <label>
+                        <input type="checkbox" name="export-type" value="audit"> Audit Logs
+                    </label>
+                </div>
+
+                <button onclick="generateExport()">Generate Export</button>
+                <div id="export-progress" style="display:none;">
+                    <p>Generating export file...</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="audit-tab" class="admin-tab-content" style="display:none;">
+            <h3>Audit Logs</h3>
+            
+            <div id="audit-filters">
+                <h4>Filter Logs</h4>
+                <input type="text" id="audit-search" placeholder="Search actions...">
+                <select id="audit-user">
+                    <option value="">All Users</option>
+                    <!-- User options will be populated -->
+                </select>
+                <input type="date" id="audit-date">
+                <button onclick="loadAuditLogs()">Apply Filters</button>
+            </div>
+
+            <div id="audit-logs">
+                <h4>Recent Activity</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>User</th>
+                            <th>Action</th>
+                            <th>Entity</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody id="audit-table-body">
+                        <!-- Audit logs will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2023 Biological Verification System</p>
+    </footer>
+    <script src="js/admin.js"></script>
+</body>
+</html>

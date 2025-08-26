@@ -1,0 +1,30 @@
+{
+  "name": "bvs-app",
+  "version": "1.0.0",
+  "description": "Biological Verification System - Full-stack biometric verification platform",
+  "scripts": {
+    "setup": "npm install && cd server && npm install && npm run db:init",
+    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
+    "dev:client": "live-server client --port=5173 --no-browser",
+    "dev:server": "cd server && npm run dev",
+    "build": "cd server && npm run build",
+    "start": "cd server && npm start",
+    "test": "cd server && npm test",
+    "seed": "cd server && npm run seed"
+  },
+  "keywords": [
+    "biometric",
+    "verification",
+    "crime-control",
+    "webapp",
+    "nodejs",
+    "express",
+    "sqlite"
+  ],
+  "author": "BVS Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "live-server": "^1.2.2"
+  }
+}

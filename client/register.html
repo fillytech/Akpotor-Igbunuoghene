@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - BVS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Biological Verification System</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="biometric.html">Biometric Capture</a></li>
+                <li><a href="cases.html">Case Management</a></li>
+                <li><a href="search.html">Database Search</a></li>
+                <li><a href="admin.html">Admin</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="register.html">Register</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div id="register-container">
+            <h2>Register</h2>
+            
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="register-email">Email:</label>
+                    <input type="email" id="register-email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="register-password">Password:</label>
+                    <input type="password" id="register-password" required 
+                           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                           title="Password must be at least 8 characters long, contain uppercase, lowercase, number, and special character">
+                </div>
+                
+                <div class="form-group">
+                    <label for="register-confirm-password">Confirm Password:</label>
+                    <input type="password" id="register-confirm-password" required>
+                </div>
+                
+                <button type="submit">Register</button>
+            </form>
+            
+            <div id="register-message"></div>
+            
+            <p>Already have an account? <a href="login.html">Login here</a></p>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2023 Biological Verification System</p>
+    </footer>
+    <script src="js/auth.js"></script>
+</body>
+</html>

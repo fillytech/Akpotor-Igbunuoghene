@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Management - BVS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Biological Verification System</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="biometric.html">Biometric Capture</a></li>
+                <li><a href="cases.html">Case Management</a></li>
+                <li><a href="search.html">Database Search</a></li>
+                <li><a href="admin.html">Admin</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Case Management</h2>
+        
+        <div id="create-case">
+            <h3>Create New Case</h3>
+            <form id="case-form">
+                <input type="text" id="case-title" placeholder="Case Title" required>
+                <textarea id="case-description" placeholder="Case Description"></textarea>
+                <select id="case-status">
+                    <option value="open">Open</option>
+                    <option value="in-review">In Review</option>
+                    <option value="matched">Matched</option>
+                    <option value="closed">Closed</option>
+                </select>
+                <button type="submit">Create Case</button>
+            </form>
+        </div>
+
+        <div id="cases-list">
+            <h3>Existing Cases</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Status</th>
+                        <th>Created</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="cases-table-body">
+                    <!-- Cases will be populated here -->
+                </tbody>
+            </table>
+        </div>
+
+        <div id="case-details" style="display:none;">
+            <h3>Case Details</h3>
+            <div id="case-info"></div>
+            
+            <h4>Add Note</h4>
+            <textarea id="case-note" placeholder="Add a note..."></textarea>
+            <button onclick="addCaseNote()">Add Note</button>
+            
+            <h4>Attach File</h4>
+            <input type="file" id="case-attachment">
+            <button onclick="addCaseAttachment()">Attach File</button>
+            
+            <h4>Timeline</h4>
+            <div id="case-timeline"></div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2023 Biological Verification System</p>
+    </footer>
+    <script src="js/cases.js"></script>
+</body>
+</html>
