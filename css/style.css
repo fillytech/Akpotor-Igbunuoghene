@@ -1,58 +1,185 @@
+/* Nigerian Police Force Theme for BVS Application */
 body {
-    background: url('images/npf-bg.jpg') no-repeat center center fixed;
-    background-size: cover;
-    margin: 0;
-    min-height: 100vh;
-}
-header {
-    display: flex;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 10px 20px;
-}
-#npf-logo {
-    width: 48px;
-    height: 48px;
-    margin-right: 16px;
-}
-header h1 {
-    flex: 1;
-    color: #fff;
-    margin: 0;
-    font-size: 2em;
-}
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 12px;
+    font-family: 'Segoe UI', Arial, sans-serif;
     margin: 0;
     padding: 0;
-}
-nav a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-}
-main {
-    background: rgba(255, 255, 255, 0.85);
-    margin: 32px auto;
-    padding: 24px;
-    border-radius: 12px;
-    max-width: 900px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
-}
-footer {
-    background: rgba(0,0,0,0.4);
-    color: #fff;
-    text-align: center;
-    padding: 12px 0;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
+    background-color: #ffffff;
+    color: #333;
+    background-image: url('../images/npf-bg.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
 }
 
-@media (max-width: 600px) {
-  .container {
-    padding: 10px;
-  }
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.logo {
+    height: 80px;
+    margin-right: 20px;
+}
+
+header {
+    background: linear-gradient(90deg, #003366 70%, #cc0000 100%);
+    color: #ffd700;
+    padding: 20px 0 15px 0;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    font-size: 1.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+
+header h1 {
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+nav {
+    background: #003366;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 0 0 12px 12px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.1rem;
+    padding: 12px 20px;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+    border: 2px solid transparent;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    background: #cc0000;
+    color: #ffd700;
+    border-color: #ffd700;
+}
+
+main {
+    padding: 32px 20px;
+    max-width: 900px;
+    margin: 32px auto;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,51,102,0.15);
+    backdrop-filter: blur(10px);
+}
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background: linear-gradient(90deg, #003366 70%, #cc0000 100%);
+    color: #ffd700;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    margin-top: 32px;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+footer p {
+    margin: 0;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+/* Modern Button Styles */
+button, .btn {
+    background: #cc0000;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 32px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(204,0,0,0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+button:hover, .btn:hover {
+    background: #ffd700;
+    color: #003366;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(204,0,0,0.4);
+}
+
+button:active, .btn:active {
+    transform: translateY(0);
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #003366;
+    font-weight: 600;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #003366;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #cc0000;
+    box-shadow: 0 0 8px rgba(204,0,0,0.3);
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th {
+    background: #003366;
+    color: #ffffff;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+}
+
+table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+table tr:hover {
+    background: #f8f9fa;
 }
