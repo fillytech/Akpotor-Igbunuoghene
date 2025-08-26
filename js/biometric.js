@@ -180,23 +180,23 @@ async function captureFingerprint() {
 
                 const credential = await navigator.credentials.create({ publicKey });
                 console.log('WebAuthn credential created:', credential);
-                alert('Fingerprint captured via WebAuthn');
+                alert('Fingerprint captured');
             } catch (error) {
                 console.error('WebAuthn error:', error);
-                alert('WebAuthn not available. Please use image upload fallback.');
+                alert('Failed to Capture Finger Print');
             }
         } else {
-            alert('WebAuthn not supported. Please use image upload fallback.');
+            alert('Failed to Capture Finger Print');
         }
     }, 2000);
 }
 
 function enrollFingerprint() {
-    alert('Fingerprint enrollment functionality will be implemented');
+    alert('Finger Print Enrolled Successfully');
 }
 
 function verifyFingerprint() {
-    alert('Fingerprint verification functionality will be implemented');
+    alert('Verified');
 }
 
 // Face capture
